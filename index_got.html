@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    
+    <title>Document</title>
+    <style>
+
+    html, body {
+        background: url(https://wallpaperaccess.com/full/25493.jpg) fixed center no-repeat;
+        background-size: cover;
+        text-align: center;
+        height: 500%;
+        overflow: hidden;
+    }
+/*
+    .svg-wrapper {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+	  margin: 0 auto;
+  width: 320px;  
+}
+.shape {
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  fill: transparent;
+  stroke: #19f6e8;
+  border-bottom: 5px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+.text {
+  font-family: 'Roboto Condensed';
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 8px;
+  color: #fff;
+  top: -48px;
+  position: relative;
+}
+.svg-wrapper:hover .shape {
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 760;
+}
+*/
+    .text {
+        font-family: 'Roboto Condensed';
+        font-size: 22px;
+        line-height: 32px;
+        letter-spacing: 8px;
+        color: #fff;
+        top: -48px;
+        position: relative;
+    }
+
+    .img-house{
+        width: 15rem;
+        height: 15rem;
+        margin: 1rem;
+    }
+    .imagen{
+        display: inline-block;
+        
+    }
+    .aviso{
+
+    }
+    
+    </style>
+</head>
+
+<body>
+    
+    <div id="house" class="container">
+        <div class="imagen h-stark">
+          <img src="gameofthrones/stark.jpg" class="img-house" data-house="362">
+        </div>
+        <div class="imagen h-targaryen">
+            <img src="gameofthrones/targaryen.jpg" class="img-house"data-house="229" >
+        </div>
+        <div class="imagen h-lannister">
+            <img src="gameofthrones/lannister.jpg" class="img-house"data-house="378" >
+        </div>
+        <div class="imagen h-baratheon">
+            <img src="gameofthrones/baratheon.png" class="img-house"data-house="17" >
+        </div>
+      </div>
+      <br>
+      <div class="alert alert-light container aviso svg-wrapper" role="alert">
+        <h4 class="alert-heading shape nombre">Well done!</h4>
+        <p class="words">Aww yeah</p>
+        <hr>
+        <div class="titles">Whenever you need to.</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+         $(document).ready(function() {      
+            $(document).on('click','.img-house', function(){        
+            var house_name=$(this).attr('data-house');
+            
+                $.get(
+                    `https://anapioficeandfire.com/api/houses/${house_name}`,
+                    
+                    
+                     function(got_house) {
+                         debugger
+                         console.log(got_house.titles)
+                         var nombre =got_house.name;
+                         var words =got_house.words;
+                        var info_house= `<ul>`;
+                        for(var i=0;i<got_house.titles.lenght;i++){
+                            info_house += `<li>${got_house.titles[i]}</li>`;
+                            console.log(got_house.titles)
+                        }
+                        info_house += `</ul>`;
+
+                        $('.nombre').html(nombre);
+                        $('.words').html(words);
+                        $('.titles').html(info_house);
+
+
+                         
+                        // your code here (build up your url)
+ 
+                    });
+            });
+         });
+    </script>
+</body>
+</html>
